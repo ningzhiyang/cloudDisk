@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imnu.cloudDisk.mapper.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.imnu.cloudDisk.entity.SysRole">
+    <id column="r_id" jdbcType="INTEGER" property="rId" />
+    <result column="r_name" jdbcType="VARCHAR" property="rName" />
+    <result column="r_detail" jdbcType="VARCHAR" property="rDetail" />
+    <result column="r_group" jdbcType="VARCHAR" property="rGroup" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    r_id, r_name, r_detail, r_group
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where r_id = #{rId,jdbcType=INTEGER}
+  </select>
+    <select id="findRoleByRid" parameterType="integer" resultMap="BaseResultMap">
+        select  * from sys_role where r_id = #{rId}
+    </select>
+    <select id="findAllRole" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from sys_role
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role
+    where r_id = #{rId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="r_id" keyProperty="rId" parameterType="com.imnu.cloudDisk.entity.SysRole" useGeneratedKeys="true">
+    insert into sys_role (r_name, r_detail
+      )
+    values (#{rName,jdbcType=VARCHAR}, #{rDetail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="r_id" keyProperty="rId" parameterType="com.imnu.cloudDisk.entity.SysRole" useGeneratedKeys="true">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rName != null">
+        r_name,
+      </if>
+      <if test="rDetail != null">
+        r_detail,
+      </if>
+      <if test="rGroup != null">
+        r_group,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rName != null">
+        #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rDetail != null">
+        #{rDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="rGroup != null">
+        #{rGroup,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imnu.cloudDisk.entity.SysRole">
+    update sys_role
+    <set>
+      <if test="rName != null">
+        r_name = #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rDetail != null">
+        r_detail = #{rDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="rGroup != null">
+        r_group = #{rGroup,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where r_id = #{rId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imnu.cloudDisk.entity.SysRole">
+    update sys_role
+    set r_name = #{rName,jdbcType=VARCHAR},
+      r_detail = #{rDetail,jdbcType=VARCHAR}
+    where r_id = #{rId,jdbcType=INTEGER}
+  </update>
+  <update id="updateSysRoleGroupById">
+    update sys_role
+    set r_group = #{rGroup,jdbcType=VARCHAR}
+    where r_id = #{rId,jdbcType=INTEGER}
+  </update>
+</mapper>

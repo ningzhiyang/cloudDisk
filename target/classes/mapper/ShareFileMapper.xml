@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imnu.cloudDisk.mapper.ShareFileMapper">
+  <resultMap id="BaseResultMap" type="com.imnu.cloudDisk.entity.ShareFile">
+    <id column="s_id" jdbcType="INTEGER" property="sId" />
+    <result column="s_href" jdbcType="VARCHAR" property="sHref" />
+    <result column="s_code" jdbcType="VARCHAR" property="sCode" />
+    <result column="f_id" jdbcType="INTEGER" property="fId" />
+    <result column="s_overdue" jdbcType="VARCHAR" property="sOverdue" />
+    <result column="s_creat_time" jdbcType="VARCHAR" property="sCreatTime" />
+    <result column="s_status" jdbcType="BOOLEAN" property="sStatus" />
+    <result column="s_down_count" jdbcType="INTEGER" property="sDownCount" />
+    <result column="v_id" jdbcType="INTEGER" property="vId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    s_id, s_href, s_code, f_id, s_overdue, s_creat_time, s_status, s_down_count,v_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from share_file
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <select id="getShareFileByHref" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from share_file where s_href = #{sign} and s_status = 0
+  </select>
+  <select id="findAllShareFileByVid" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from share_file where v_id = #{vId} and s_status = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from share_file
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="s_id" keyProperty="sId" parameterType="com.imnu.cloudDisk.entity.ShareFile" useGeneratedKeys="true">
+    insert into share_file (s_href, s_code, f_id, 
+      s_overdue, s_creat_time, s_status, 
+      s_down_count, v_id)
+    values (#{sHref,jdbcType=VARCHAR}, #{sCode,jdbcType=VARCHAR}, #{fId,jdbcType=INTEGER}, 
+      #{sOverdue,jdbcType=VARCHAR}, #{sCreatTime,jdbcType=VARCHAR}, #{sStatus,jdbcType=BOOLEAN}, 
+      #{sDownCount,jdbcType=INTEGER},#{vId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="s_id" keyProperty="sId" parameterType="com.imnu.cloudDisk.entity.ShareFile" useGeneratedKeys="true">
+    insert into share_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sHref != null">
+        s_href,
+      </if>
+      <if test="sCode != null">
+        s_code,
+      </if>
+      <if test="fId != null">
+        f_id,
+      </if>
+      <if test="sOverdue != null">
+        s_overdue,
+      </if>
+      <if test="sCreatTime != null">
+        s_creat_time,
+      </if>
+      <if test="sStatus != null">
+        s_status,
+      </if>
+      <if test="sDownCount != null">
+        s_down_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sHref != null">
+        #{sHref,jdbcType=VARCHAR},
+      </if>
+      <if test="sCode != null">
+        #{sCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="sOverdue != null">
+        #{sOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="sCreatTime != null">
+        #{sCreatTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sStatus != null">
+        #{sStatus,jdbcType=BOOLEAN},
+      </if>
+      <if test="sDownCount != null">
+        #{sDownCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+    <update id="addDownCount">
+      update share_file set s_down_count = s_down_count+1 where s_id = #{sid}
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.imnu.cloudDisk.entity.ShareFile">
+    update share_file
+    <set>
+      <if test="sHref != null">
+        s_href = #{sHref,jdbcType=VARCHAR},
+      </if>
+      <if test="sCode != null">
+        s_code = #{sCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        f_id = #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="sOverdue != null">
+        s_overdue = #{sOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="sCreatTime != null">
+        s_creat_time = #{sCreatTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sStatus != null">
+        s_status = #{sStatus,jdbcType=BOOLEAN},
+      </if>
+      <if test="sDownCount != null">
+        s_down_count = #{sDownCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imnu.cloudDisk.entity.ShareFile">
+    update share_file
+    set s_href = #{sHref,jdbcType=VARCHAR},
+      s_code = #{sCode,jdbcType=VARCHAR},
+      f_id = #{fId,jdbcType=INTEGER},
+      s_overdue = #{sOverdue,jdbcType=VARCHAR},
+      s_creat_time = #{sCreatTime,jdbcType=VARCHAR},
+      s_status = #{sStatus,jdbcType=BOOLEAN},
+      s_down_count = #{sDownCount,jdbcType=INTEGER}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatus" parameterType="com.imnu.cloudDisk.entity.ShareFile">
+    update share_file
+    set s_status = #{sStatus,jdbcType=BOOLEAN}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+</mapper>

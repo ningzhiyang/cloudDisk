@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imnu.cloudDisk.mapper.VueFileMapper">
+  <resultMap id="BaseResultMap" type="com.imnu.cloudDisk.entity.VueFile">
+    <id column="f_id" jdbcType="INTEGER" property="fId" />
+    <result column="f_name" jdbcType="VARCHAR" property="fName" />
+    <result column="f_ext" jdbcType="VARCHAR" property="fExt" />
+    <result column="f_path" jdbcType="VARCHAR" property="fPath" />
+    <result column="f_size" jdbcType="VARCHAR" property="fSize" />
+    <result column="f_down_counts" jdbcType="INTEGER" property="fDownCounts" />
+    <result column="f_upload_time" jdbcType="VARCHAR" property="fUploadTime" />
+    <result column="v_id" jdbcType="INTEGER" property="vId" />
+    <result column="is_delete" jdbcType="BOOLEAN" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_id, f_name, f_ext, f_path, f_size, f_down_counts, f_upload_time,
+    v_id, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file_v
+    where f_id = #{fId,jdbcType=INTEGER}
+  </select>
+  <select id="findFileByFileName" parameterType="string" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from file_v where f_name = #{name} and v_id=#{vId}
+  </select>
+  <select id="findFileByVid" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from file_v where v_id=#{vId}
+  </select>
+    <select id="findFileIsExitByFileName" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from file_v where v_id=#{vId} and f_name = #{fileName} and is_delete = 0
+    </select>
+  <select id="findFileByFid" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from file_v where f_id = #{fid}
+  </select>
+    <select id="findAllFile" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from file_v
+    </select>
+  <select id="findFileIsExitByFileName1" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from file_v where v_id=#{vId} and f_name = #{filename} and is_delete = 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from file_v
+    where f_id = #{fId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="f_id" keyProperty="fId" parameterType="com.imnu.cloudDisk.entity.VueFile" useGeneratedKeys="true">
+    insert into file_v (f_name, f_ext, f_path, 
+      f_size,
+      f_down_counts, f_upload_time, v_id, 
+      is_delete)
+    values (#{fName,jdbcType=VARCHAR}, #{fExt,jdbcType=VARCHAR}, #{fPath,jdbcType=VARCHAR}, 
+      #{fSize,jdbcType=VARCHAR},
+      #{fDownCounts,jdbcType=INTEGER}, #{fUploadTime,jdbcType=VARCHAR}, #{vId,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="f_id" keyProperty="fId" parameterType="com.imnu.cloudDisk.entity.VueFile" useGeneratedKeys="true">
+    insert into file_v
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fName != null">
+        f_name,
+      </if>
+      <if test="fExt != null">
+        f_ext,
+      </if>
+      <if test="fPath != null">
+        f_path,
+      </if>
+      <if test="fSize != null">
+        f_size,
+      </if>
+      <if test="fDownCounts != null">
+        f_down_counts,
+      </if>
+      <if test="fUploadTime != null">
+        f_upload_time,
+      </if>
+      <if test="vId != null">
+        v_id,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fExt != null">
+        #{fExt,jdbcType=VARCHAR},
+      </if>
+      <if test="fPath != null">
+        #{fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fSize != null">
+        #{fSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fDownCounts != null">
+        #{fDownCounts,jdbcType=INTEGER},
+      </if>
+      <if test="fUploadTime != null">
+        #{fUploadTime,jdbcType=VARCHAR},
+      </if>
+      <if test="vId != null">
+        #{vId,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imnu.cloudDisk.entity.VueFile">
+    update file_v
+    <set>
+      <if test="fName != null">
+        f_name = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fExt != null">
+        f_ext = #{fExt,jdbcType=VARCHAR},
+      </if>
+      <if test="fPath != null">
+        f_path = #{fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fSize != null">
+        f_size = #{fSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fDownCounts != null">
+        f_down_counts = #{fDownCounts,jdbcType=INTEGER},
+      </if>
+      <if test="fUploadTime != null">
+        f_upload_time = #{fUploadTime,jdbcType=VARCHAR},
+      </if>
+      <if test="vId != null">
+        v_id = #{vId,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imnu.cloudDisk.entity.VueFile">
+    update file_v
+    set f_name = #{fName,jdbcType=VARCHAR},
+      f_ext = #{fExt,jdbcType=VARCHAR},
+      f_path = #{fPath,jdbcType=VARCHAR},
+      f_size = #{fSize,jdbcType=VARCHAR},
+      f_down_counts = #{fDownCounts,jdbcType=INTEGER},
+      f_upload_time = #{fUploadTime,jdbcType=VARCHAR},
+      v_id = #{vId,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=BOOLEAN}
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatus" parameterType="com.imnu.cloudDisk.entity.VueFile">
+    update file_v
+    set is_delete = #{isDelete,jdbcType=BOOLEAN}
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+    <update id="updateStatusById">
+      update file_v set is_delete = 1 where f_id = #{id}
+    </update>
+  <update id="updateFnameById">
+    update file_v set f_name = #{fName} where f_id = #{fId}
+  </update>
+</mapper>

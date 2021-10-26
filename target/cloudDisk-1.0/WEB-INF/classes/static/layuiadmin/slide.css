@@ -1,0 +1,13 @@
+*{ padding: 0; margin: 0;}
+li{ list-style: none;}
+.clearfix{ *zoom:1;}
+.clearfix:after{ clear: both; display: block; content: ""; height: 0; overflow: hidden;}
+a{ text-decoration: none;}
+a:hover{ color: #f00;}
+#box{ width: 700px; margin: 20px auto; border: 1px ; font-size: 12px; position: relative; height: 120px;}
+#left ,#right{ position: absolute; z-index: 2px; cursor: pointer;width: 20px; text-align: center; height: 100%; line-height: 2.4; }
+#left{ left: 0;width:120px;height:100px}
+#right{ right: 0;}
+#wrap{ position: absolute; left: 0; width: 150px;}
+#wrap ul{ padding: 10px 0;}
+#wrap li{ float: left; width: 120px; height: 100px; margin-left: 10px;}

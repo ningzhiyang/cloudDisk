@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: clouddisk
+    password: 123456
+    url: jdbc:mysql://47.99.39.91:3306/clouddisk?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+#mybatis配置
+mybatis:
+  typeAliasesPackage: com.imnu.cloudDisk.entity
+  mapperLocations: mapper/*.xml
+#mybatis-plus:
+#  mapper-locations: mapper/*.xml
+server:
+  servlet:
+    context-path: /cloud
+#  typeAliasesPackage: com.nzy.sheep.entity

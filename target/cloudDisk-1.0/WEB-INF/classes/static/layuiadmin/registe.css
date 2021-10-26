@@ -1,0 +1,230 @@
+ /* logo */
+ .logo {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+/* 页面 */
+.large-header {
+	position: relative;
+	width: 100%;
+	background: #8e8e8e;
+	overflow: hidden;
+	background-size: cover;
+	background-position: center center;
+
+}
+
+/* 页面背景图片 */
+.large-header {
+	/* background-image: url("img/login-bg.jpg"); */
+}
+
+/* 注册盒子 */
+.logo_box {
+	width: 500px;
+	height: 730px;
+	padding: 35px 85px;
+	color: #EEE;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: -370px;
+	background: rgb(24, 24, 24);
+	opacity: 0.8;
+	border-radius: 25px;
+	z-index: 9999;
+}
+
+/* 欢迎注册 */
+.logo_box h3 {
+	height: 20px;
+	font: 20px "microsoft yahei", Helvetica, Tahoma, Arial, "Microsoft jhengHei", sans-serif;
+	color: #FFFFFF;
+	height: 20px;
+	line-height: 20px;
+	padding: 0 0 35px 0;
+}
+
+/* input */
+.input_outer {
+	height: 46px;
+	padding: 0 5px;
+	margin-bottom: 30px;
+	border-radius: 50px;
+	position: relative;
+	border: rgba(255, 255, 255, 0.2) 2px solid !important;
+}
+
+/* 姓名 */
+.u_user {
+	width: 25px;
+	height: 25px;
+	background: url("img/login_ico.png");
+	background-position: -125px 0;
+	position: absolute;
+	margin: 10px 13px;
+}
+
+/* 手机号 */
+.us_phone {
+	width: 25px;
+	height: 30px;
+	background-image: url("img/login_ico.png");
+	background-position: -84px -109px;
+	position: absolute;
+	margin: 7px 10px;
+}
+
+/* 邮箱 */
+.us_email {
+	width: 25px;
+	height: 30px;
+	background-image: url("img/login_ico.png");
+	background-position: -84px 5px;
+	position: absolute;
+	margin: 7px 10px;
+}
+
+/* 验证码 */
+.us_check {
+	width: 25px;
+	height: 25px;
+	background-image: url("img/login_ico.png");
+	background-position: -125px -212px;
+	position: absolute;
+	margin: 10px 13px;
+}
+
+/* 省市区 */
+.us_white1,
+.us_white2,
+.us_white3 {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	margin: 10px 10px;
+}
+/* 请输入 */
+.text {
+	width: 220px;
+	height: 46px;
+	outline: none;
+	display: inline-block;
+	font: 14px "microsoft yahei", Helvetica, Tahoma, Arial, "Microsoft jhengHei";
+	margin-left: 50px;
+	border: none;
+	background: none;
+	line-height: 46px;
+}
+
+.text1 {
+	width: 150px;
+	height: 46px;
+	outline: none;
+	display: inline-block;
+	font: 14px "microsoft yahei", Helvetica, Tahoma, Arial, "Microsoft jhengHei";
+	margin-left: 50px;
+	border: none;
+	background: none;
+	line-height: 46px;
+}
+
+/* 注册按钮 */
+input.zhuce{
+	width: 100%;
+	background-color: #0096e6;
+	border-radius: 50px;
+	padding: 15px;
+	border: none;
+	font-size: 20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+/* 去input自动填充背景 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-transition-delay: 99999s;
+	-webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
+
+.align-center {
+	text-align: center;
+}
+
+/* 获取验证码 */
+.get_num {
+	width: 110px;
+	height: 40px;
+	border: 2px solid #ffffff;
+	border-radius: 10px;
+	margin-left: 213px;
+	/* margin-top: 4p; */
+	box-shadow: 2px 2px 2px #888888;
+}
+
+/* 省市区 */
+select {
+	width: 275px;
+	height: 46px;
+	border-radius: 20px;
+	margin-bottom: 25px;
+	opacity: 0.5;
+	-webkit-appearance: none;
+	/* google */
+	-moz-appearance: none;
+	/* firefox */
+	appearance: none;
+	/* IE */
+	background: none;
+	color: #FFFFFF !important;
+	border: rgba(255, 255, 255, 0.2) 2px solid !important;
+	margin-left: 55px;
+	padding-left: 30px;
+}
+
+/* 下拉内容 */
+option {
+	-webkit-appearance: none;
+	/* google */
+	-moz-appearance: none;
+	/* firefox */
+	appearance: none;
+	/* IE */
+	background: white;
+	color: #000 !important;
+	font: 14px "microsoft yahei", Helvetica, Tahoma, Arial, "Microsoft jhengHei";
+	padding-left: 50px;
+}
+
+
+canvas {
+	display:inline-block;
+}
+html {
+	font-family:sans-serif;
+	-ms-text-size-adjust:100%;
+	-webkit-text-size-adjust:100%;
+	height: 100%;
+}
+
+/*----------*/
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+
+body {
+	/* background: #fff; */
+	margin:0;
+	color: #383a3c;
+	font-weight: 400;
+	font-size: 1em;
+	line-height: 1.25;
+	font-family: 'Raleway', Calibri, Arial, sans-serif;
+}
+
+

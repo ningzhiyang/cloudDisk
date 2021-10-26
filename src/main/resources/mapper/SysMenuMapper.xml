@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imnu.cloudDisk.mapper.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="com.imnu.cloudDisk.entity.SysMenu">
+    <id column="m_id" jdbcType="INTEGER" property="mId" />
+    <result column="m_first_menu_id" jdbcType="INTEGER" property="mFirstMenuId" />
+    <result column="m_second_menu_id" jdbcType="INTEGER" property="mSecondMenuId" />
+    <result column="m_third_menu_id" jdbcType="INTEGER" property="mThirdMenuId" />
+    <result column="m_url" jdbcType="VARCHAR" property="mUrl" />
+    <result column="m_name" jdbcType="VARCHAR" property="mName" />
+    <result column="m_icon" jdbcType="VARCHAR" property="mIcon" />
+    <result column="m_status" jdbcType="BOOLEAN" property="mStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    m_id, m_first_menu_id, m_second_menu_id, m_third_menu_id, m_url, m_name, m_icon, 
+    m_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where m_id = #{mId,jdbcType=INTEGER}
+  </select>
+    <select id="findAllMenu" resultMap="BaseResultMap">
+      select * from sys_menu
+    </select>
+  <select id="getMenuByName" resultMap="BaseResultMap">
+    select * from sys_menu where m_name like '%${name}%'
+  </select>
+  <select id="getSysMenuByValue" parameterType="integer" resultMap="BaseResultMap">
+    select * from sys_menu where m_first_menu_id = #{mFirstMenuId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_menu
+    where m_id = #{mId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="m_id" keyProperty="mId" parameterType="com.imnu.cloudDisk.entity.SysMenu" useGeneratedKeys="true">
+    insert into sys_menu (m_first_menu_id, m_second_menu_id, m_third_menu_id, 
+      m_url, m_name, m_icon, 
+      m_status)
+    values (#{mFirstMenuId,jdbcType=INTEGER}, #{mSecondMenuId,jdbcType=INTEGER}, #{mThirdMenuId,jdbcType=INTEGER}, 
+      #{mUrl,jdbcType=VARCHAR}, #{mName,jdbcType=VARCHAR}, #{mIcon,jdbcType=VARCHAR}, 
+      #{mStatus,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="m_id" keyProperty="mId" parameterType="com.imnu.cloudDisk.entity.SysMenu" useGeneratedKeys="true">
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mFirstMenuId != null">
+        m_first_menu_id,
+      </if>
+      <if test="mSecondMenuId != null">
+        m_second_menu_id,
+      </if>
+      <if test="mThirdMenuId != null">
+        m_third_menu_id,
+      </if>
+      <if test="mUrl != null">
+        m_url,
+      </if>
+      <if test="mName != null">
+        m_name,
+      </if>
+      <if test="mIcon != null">
+        m_icon,
+      </if>
+      <if test="mStatus != null">
+        m_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mFirstMenuId != null">
+        #{mFirstMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="mSecondMenuId != null">
+        #{mSecondMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="mThirdMenuId != null">
+        #{mThirdMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="mUrl != null">
+        #{mUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mName != null">
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mIcon != null">
+        #{mIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="mStatus != null">
+        #{mStatus,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imnu.cloudDisk.entity.SysMenu">
+    update sys_menu
+    <set>
+      <if test="mFirstMenuId != null">
+        m_first_menu_id = #{mFirstMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="mSecondMenuId != null">
+        m_second_menu_id = #{mSecondMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="mThirdMenuId != null">
+        m_third_menu_id = #{mThirdMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="mUrl != null">
+        m_url = #{mUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mName != null">
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mIcon != null">
+        m_icon = #{mIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="mStatus != null">
+        m_status = #{mStatus,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imnu.cloudDisk.entity.SysMenu">
+    update sys_menu
+    set m_first_menu_id = #{mFirstMenuId,jdbcType=INTEGER},
+      m_second_menu_id = #{mSecondMenuId,jdbcType=INTEGER},
+      m_third_menu_id = #{mThirdMenuId,jdbcType=INTEGER},
+      m_url = #{mUrl,jdbcType=VARCHAR},
+      m_name = #{mName,jdbcType=VARCHAR},
+      m_icon = #{mIcon,jdbcType=VARCHAR}
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatusById">
+    update sys_menu set m_status = #{status} where m_id = #{id}
+  </update>
+</mapper>

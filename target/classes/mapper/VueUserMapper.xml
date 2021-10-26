@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imnu.cloudDisk.mapper.VueUserMapper">
+  <resultMap id="BaseResultMap" type="com.imnu.cloudDisk.entity.VueUser">
+    <id column="v_id" jdbcType="INTEGER" property="vId" />
+    <result column="v_account" jdbcType="VARCHAR" property="vAccount" />
+    <result column="v_pwd" jdbcType="VARCHAR" property="vPwd" />
+    <result column="v_img" jdbcType="VARCHAR" property="vImg" />
+    <result column="v_phone" jdbcType="VARCHAR" property="vPhone" />
+    <result column="v_status" jdbcType="INTEGER" property="vStatus" />
+    <result column="v_login_ip" jdbcType="VARCHAR" property="vLoginIp" />
+    <result column="v_login_time" jdbcType="VARCHAR" property="vLoginTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    v_id, v_account, v_pwd, v_img, v_phone, v_status, v_login_time, v_login_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from v_user
+    where v_id = #{vId,jdbcType=INTEGER}
+  </select>
+    <select id="findAllUser" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from v_user
+    </select>
+  <select id="findAllByName" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from v_user where v_account like '%${name}%'
+  </select>
+  <select id="login" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from v_user where v_account = #{username} and v_pwd = #{password}
+  </select>
+    <select id="getVidByVueUserName" parameterType="string" resultType="java.lang.Integer">
+      select v_id from  v_user where v_account = #{username}
+    </select>
+    <select id="getVueByUserName" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from v_user where v_account = #{username}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from v_user
+    where v_id = #{vId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="v_id" keyProperty="vId" parameterType="com.imnu.cloudDisk.entity.VueUser" useGeneratedKeys="true">
+    insert into v_user (v_account, v_pwd, v_img, 
+      v_phone, v_status, v_login_time
+      )
+    values (#{vAccount,jdbcType=VARCHAR}, #{vPwd,jdbcType=VARCHAR}, #{vImg,jdbcType=VARCHAR}, 
+      #{vPhone,jdbcType=VARCHAR}, 1, #{vLoginTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="v_id" keyProperty="vId" parameterType="com.imnu.cloudDisk.entity.VueUser" useGeneratedKeys="true">
+    insert into v_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vAccount != null">
+        v_account,
+      </if>
+      <if test="vPwd != null">
+        v_pwd,
+      </if>
+      <if test="vImg != null">
+        v_img,
+      </if>
+      <if test="vPhone != null">
+        v_phone,
+      </if>
+      <if test="vStatus != null">
+        v_status,
+      </if>
+      <if test="vLoginTime != null">
+        v_login_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vAccount != null">
+        #{vAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="vPwd != null">
+        #{vPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="vImg != null">
+        #{vImg,jdbcType=VARCHAR},
+      </if>
+      <if test="vPhone != null">
+        #{vPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="vStatus != null">
+        #{vStatus,jdbcType=BOOLEAN},
+      </if>
+      <if test="vLoginTime != null">
+        #{vLoginTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imnu.cloudDisk.entity.VueUser">
+    update v_user
+    <set>
+      <if test="vAccount != null">
+        v_account = #{vAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="vPwd != null">
+        v_pwd = #{vPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="vImg != null">
+        v_img = #{vImg,jdbcType=VARCHAR},
+      </if>
+      <if test="vPhone != null">
+        v_phone = #{vPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="vStatus != null">
+        v_status = #{vStatus,jdbcType=BOOLEAN},
+      </if>
+      <if test="vLoginTime != null">
+        v_login_time = #{vLoginTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where v_id = #{vId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imnu.cloudDisk.entity.VueUser">
+    update v_user
+    set v_account = #{vAccount,jdbcType=VARCHAR},
+      v_pwd = #{vPwd,jdbcType=VARCHAR},
+      v_img = #{vImg,jdbcType=VARCHAR},
+      v_phone = #{vPhone,jdbcType=VARCHAR},
+      v_status = #{vStatus,jdbcType=BOOLEAN},
+      v_login_time = #{vLoginTime,jdbcType=VARCHAR}
+    where v_id = #{vId,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatusById">
+    update v_user set v_status = #{u_status} where v_id = #{id}
+  </update>
+    <update id="updateVuePwdByUserName">
+      update v_user set v_pwd = #{pwd} where v_account = #{username}
+    </update>
+    <update id="updateIpByVueUser">
+      update v_user set v_login_ip = #{vLoginIp},v_login_time=#{vLoginTime} where v_id= #{vId}
+    </update>
+</mapper>

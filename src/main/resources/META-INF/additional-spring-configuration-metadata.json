@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "hadoop.name-node",
+      "type": "java.lang.String",
+      "description": "Description for hadoop.name-node."
+    },
+    {
+      "name": "hadoop.name-node",
+      "type": "java.lang.String",
+      "description": "Description for hadoop.name-node."
+    }
+  ] }
